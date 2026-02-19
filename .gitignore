@@ -1,0 +1,7 @@
+# Intermediate files (can be regenerated)
+temp/
+# Python cache
+__pycache__/
+*.pyc
+# macOS
+.DS_Store
