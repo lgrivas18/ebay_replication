@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\title{The Effect of Paid Search Advertising on Revenue: \\
+A Replication of the eBay Natural Experiment}
+\author{Your Name}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Introduction}
+
+The central research question is: what is the causal effect of paid search advertising on eBay’s revenue? This question is important because firms collectively spend billions of dollars each year on search engine marketing (SEM), yet accurately measuring its incremental impact remains challenging due to issues like selection bias and the difficulty of separating paid traffic from organic demand. To address this problem, the study leverages a natural experiment in which eBay temporarily shut off paid search ads in a subset of geographic markets while maintaining advertising in others, enabling a credible comparison of revenue changes across treated and untreated areas
+
+\section{Experimental Setting}
+
+Blake et al. (2014) collaborated with eBay to study the impact of paid search advertising by persuading the firm to temporarily cease bidding on branded keywords in selected geographic markets. Beginning on May 22, 2012, 65 of the 210 Designated Market Areas (DMAs) were assigned to the treatment condition, in which paid search advertising was turned off (search\_stays\_on = 0). The remaining DMAs continued their usual advertising activity and served as the control group (search\_stays\_on = 1). The intervention lasted eight weeks, creating a clear pre- and post-treatment window for analysis.
+
+The experiment was not fully randomized. The largest DMAs were intentionally excluded from the treatment group, meaning treated and control markets differed in important baseline characteristics, particularly revenue levels. Because these pre-existing differences could bias a simple comparison of average revenue across groups, the analysis relies on a difference-in-differences (DID) framework. This approach compares changes in revenue over time between treated and control DMAs, helping isolate the causal effect of turning off paid search from underlying differences in market size.
+
+\section{Data and Figures}
+
+The dataset consists of daily revenue observations for all 210 DMAs from April through July 2012, spanning both the pre-treatment and treatment periods. Key variables include the calendar date, a DMA identifier, an indicator for whether the observation falls within the treatment period, a group indicator identifying treatment versus control markets, and daily revenue. This panel structure allows for tracking revenue changes within each DMA over time and enables implementation of a difference-in-differences design to estimate the effect of paid search advertising.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../output/figures/figure_5_2.png}
+\caption{Average revenue for treatment and control DMAs over time.
+The dashed line marks May 22, 2012, when SEM was turned off
+for the treatment group.}
+\label{fig:revenue}
+\end{figure}
+
+Figure 5.2 shows that the control group consistently exhibits higher average revenue than the treatment group, which is expected given that the largest DMAs were excluded from treatment and therefore remain in the control group. Despite this level difference, both groups display very similar weekly oscillation patterns, reflecting common seasonality in consumer behavior across markets. At this aggregate scale, there is no obvious visual break or sharp divergence between the two series during the treatment period, making it difficult to infer the causal impact of turning off paid search from the raw trends alone.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../output/figures/figure_5_3.png}
+\caption{Log-scale average revenue difference between control and treatment
+groups over time. The gap appears to increase after May 22.}
+\label{fig:logdiff}
+\end{figure}
+
+Figure 5.3 plots the log ratio of control to treatment revenue over time, providing a clearer view of relative performance between the two groups. Prior to May 22, the series fluctuates around a stable level, suggesting parallel trends in revenue between control and treatment DMAs during the pre-intervention period. After May 22, the log ratio appears to increase modestly, indicating that control markets may have begun to outperform treated markets once paid search was turned off. While the shift is not dramatic, this visual pattern is consistent with a potential treatment effect and motivates a formal difference-in-differences analysis to test whether the observed change is statistically meaningful.
+
+\section{Results}
+
+\input{../output/tables/did_table.tex}
+
+The estimated treatment effect is -0.0066 when expressed in log terms. Converting this to levels, exp(-0.0066) = 0.99, which implies that treatment DMAs experienced approximately a 0.66 percent decline in revenue when paid search advertising was turned off. This is a very small effect in magnitude. In addition, the 95 pct confidence interval ranges from -0.0175 to 0.0043, and because this interval includes zero, we cannot reject the null hypothesis of no effect at the 5 pct significance level.
+
+Economically, these results indicate that shutting down paid search had, at most, a modest negative impact on revenue, and the evidence is not strong enough to conclude that the effect is statistically different from zero. For a well-known brand like eBay, this pattern is consistent with the idea that many users would find the website through organic search results or direct visits even without paid advertising. As a result, the incremental contribution of paid search advertising appears limited in this setting.
+
+\section{Conclusion}	
+
+The difference-in-differences analysis finds a small and statistically insignificant effect of turning off paid search advertising on revenue, closely mirroring the main conclusion of Blake et al. (2014). While the point estimate suggests a slight decline in revenue in treated markets, the confidence interval includes zero, indicating that the data do not provide strong evidence of a meaningful impact. Several limitations should be noted: the revenue data are scaled and shifted rather than reflecting actual dollar amounts, the treatment assignment was not fully randomized because the largest DMAs were excluded, and the empirical approach relies on a simple DID specification rather than a richer regression framework with additional controls. Even with these caveats, the findings carry important implications for measuring marketing return on investment, highlighting how paid search advertising—particularly for established brands—may generate limited incremental revenue despite substantial spending.
+
+\begin{thebibliography}{9}
+\bibitem{blake2014}
+Blake, T., C. Nosko, and S. Tadelis (2014).
+``Consumer Heterogeneity and Paid Search Effectiveness: A Large-Scale Field Experiment.''
+\textit{Econometrica}, 83(1): 155--174.
+\bibitem{taddy2019}
+Taddy, M. (2019).
+3
+\textit{Business Data Science}. McGraw-Hill, Chapter 5.
+\end{thebibliography}
+\end{document}
+
+
